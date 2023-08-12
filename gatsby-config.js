@@ -6,8 +6,8 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
-    title: "Gatsby Contentful Homepage Starter",
+    siteUrl: "https://www.gatsbyjs.com",
+    title: "Case Contentful x Gatsby",
     author: `Gatsby`,
     description: "A Gatsby Starter for building homepages with Contentful",
   },
@@ -19,6 +19,7 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         host: process.env.CONTENTFUL_HOST,
+        environment: process.env.CONTENTFUL_ENVIRONMENT,
       },
     },
     "gatsby-plugin-sharp",

@@ -10,7 +10,9 @@ En artikel kan uppdateras av flera reportrar (Om en artikel uppdateras av en ann
 
 Nyhetssidan ska bestå av en landing page, article pages och information om reportrar. Artiklarna ska vara uppdelade i kategorier.
 
-Alla artiklar ska genereras statiskt med SSG och hämtas från Contentful vid bygge.
+## Contentful 
+
+Enviroments setup vid hämtning
 
 ## Installation
 
