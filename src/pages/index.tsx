@@ -10,7 +10,7 @@ export default function Homepage({ data }) {
   const content = data.contentfulHomepage.content.map((content, i) => {
     return (
       <div key={i}>
-        <h2>{content.titel}</h2>
+        <h2 className="">{content.titel}</h2>
         {content.article?.map((article, i) => {
           return (
             <div key={i}>
