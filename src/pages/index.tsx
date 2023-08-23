@@ -58,12 +58,12 @@ export default function Homepage({ data }) {
     )
   })
 
-  return <Layout>{content}</Layout>
+  return <Layout w={"lg"}>{content}</Layout>
 }
 
 export const query = graphql`
   {
-    allContentfulCategory {
+    allContentfulCategory(sort: { createdAt: ASC }) {
       nodes {
         titel
         article {
