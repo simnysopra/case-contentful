@@ -8,6 +8,11 @@ exports.createPages = async function ({ actions, graphql }) {
           path
         }
       }
+      allContentfulReporter{
+        nodes {
+          path
+        }
+      }
     }
   `)
   data.allContentfulArticle.nodes.forEach((node) => {
@@ -15,6 +20,14 @@ exports.createPages = async function ({ actions, graphql }) {
     actions.createPage({
       path: slug,
       component: require.resolve(`./src/templates/article.tsx`),
+      context: { slug: slug },
+    })
+  })
+  data.allContentfulReporter.nodes.forEach((node) => {
+    const slug = node.path
+    actions.createPage({
+      path: slug,
+      component: require.resolve(`./src/templates/reporter.tsx`),
       context: { slug: slug },
     })
   })
