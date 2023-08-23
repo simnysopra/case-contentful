@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import moment from "moment"
 import "moment/locale/sv"
 import Layout from "../components/layout";
@@ -18,15 +18,18 @@ export default function Article({data}) {
   };
   return <Layout>
     <div className="p-10 flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
     {data.contentfulArticle.kategori.map(kategori => (
       <h3 className="">{kategori.titel}</h3>
     ))}
+
+      </div>
     <h2 className="">{data.contentfulArticle.titel}</h2>
     <div className="flex text-gray-500 flex-col gap-4">
-        <div className="flex gap-4 items-center">
+        <Link to={`/${data.contentfulArticle.reporter[0].path}`} className="flex gap-4 items-center">
           <img className="rounded-full w-8" src={data.contentfulArticle.reporter[0].profilePicture.file.url}/>
           <p>{data.contentfulArticle.reporter[0].name}</p>
-        </div>
+        </Link>
     <div className="flex gap-2 items-center">
       <div>Uppdaterad {moment(data.contentfulArticle.updatedAt).calendar()}</div>
       <div>|</div>
@@ -62,6 +65,7 @@ export const query = graphql`
       firstPublished
       reporter {
         name
+        path
         profilePicture {
           file {
             url
