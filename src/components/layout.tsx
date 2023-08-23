@@ -5,7 +5,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return <>{children}</>
+  return <div className="max-w-7xl mx-auto p-4">{children}</div>
 }
 
 export default Layout
