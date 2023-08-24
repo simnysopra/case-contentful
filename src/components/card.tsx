@@ -8,20 +8,23 @@ type Props = {
   size: "small" | "medium" | "large"
   article: any
 }
- 
+
 const card: React.FC<Props> = ({ tag, size, article }) => {
   switch (size) {
     case "small":
       return (
-        <div
-          className="w-52 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-        >
+        <div className="w-52 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
           <img
             src={article.omslagsBild.file.url}
             alt=""
             className="rounded-t-md min-h-[150px] object-cover"
           />
           <div className="p-4 h-full flex flex-col gap-4">
+            {tag && (
+              <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-100 text-indigo-500">
+                {article.kategori[0].titel}
+              </span>
+            )}
             <Link to={`/${article.path}`} className="block cursor-pointer">
               <h5 className="font-medium">{article.titel}</h5>
             </Link>
@@ -33,9 +36,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
       )
     case "medium":
       return (
-        <div
-          className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-        >
+        <div className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
           <img
             src={article.omslagsBild.file.url}
             alt=""
@@ -53,9 +54,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
       )
     case "large":
       return (
-        <div
-          className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-        >
+        <div className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
           <img
             src={article.omslagsBild.file.url}
             alt=""
@@ -85,4 +84,4 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
   }
 }
 
-export default card;
+export default card
