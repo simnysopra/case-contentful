@@ -37,7 +37,7 @@ export default function Homepage({ data }) {
 
   const content = categories.map((category, i) => {
     return (
-      <div key={i} className="">
+      <div key={i}>
         <h2 className="mb-6">{category.titel}</h2>
 
         <div className="flex gap-6 flex-wrap">
@@ -62,35 +62,7 @@ export default function Homepage({ data }) {
           .filter((article) => article.kategori[0].titel === activeCategory)
           .map((article, i) => {
             return (
-              <div
-                key={i}
-                className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-              >
-                <img
-                  src={article.omslagsBild.file.url}
-                  alt=""
-                  className="rounded-t-md min-h-[200px] object-cover"
-                />
-                <div className="p-4 h-full flex flex-col gap-4">
-                  <Link to={article.path} className="block">
-                    {" "}
-                    <h3 className="font-medium">{article.titel}</h3>
-                  </Link>
-                  <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
-                    <Link
-                      to={article.reporter[0].path}
-                      className="flex items-center gap-2"
-                    >
-                      <img
-                        className="rounded-full w-8"
-                        src={article.reporter[0].profilePicture.file.url}
-                      />
-                      <div>{article.reporter[0].name}</div>
-                    </Link>
-                    <div>{moment(article.firstPublished).calendar()}</div>
-                  </div>
-                </div>
-              </div>
+              <Card key={i} size="large" article={article} tag={false}/>
             )
           })}
       </div>
@@ -157,7 +129,7 @@ export default function Homepage({ data }) {
         <input
           type="text"
           placeholder="Sök på artiklar"
-          className="w-full text-sm border py-3 px-4 rounded-xl focus:outline-none focus:ring-2 ring-indigo-400"
+          className="w-full text-sm border py-3 px-4 rounded-xl focus:outline-none focus:ring-2 ring-indigo-400 dark:bg-gray-500 dark:text-white dark:placeholder:text-white"
           value={query}
           onChange={handleChange}
         />

@@ -13,7 +13,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
   switch (size) {
     case "small":
       return (
-        <div className="w-52 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
+        <div className="w-52 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0 dark:bg-gray-500 dark:text-white">
           <img
             src={article.omslagsBild.file.url}
             alt=""
@@ -21,9 +21,9 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
           />
           <div className="p-4 h-full flex flex-col gap-4">
             <Link to={`/${article.path}`} className="block cursor-pointer">
-              <h5 className="font-medium">{article.titel}</h5>
+              <h5 className="font-medium hover:underline">{article.titel}</h5>
             </Link>
-            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
+            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2 dark:text-white">
               <div>{moment(article.firstPublished).calendar()}</div>
             </div>
           </div>
@@ -31,7 +31,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
       )
     case "medium":
       return (
-        <div className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
+        <div className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0 dark:bg-gray-500 dark:text-white">
           <img
             src={article.omslagsBild.file.url}
             alt=""
@@ -39,9 +39,9 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
           />
           <div className="p-4 h-full flex flex-col gap-4">
             <Link to={`/${article.path}`} className="block cursor-pointer">
-              <h3 className="font-medium">{article.titel}</h3>
+              <h3 className="font-medium hover:underline dark:text-white">{article.titel}</h3>
             </Link>
-            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
+            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2 dark:text-white">
               <div>{moment(article.firstPublished).calendar()}</div>
             </div>
           </div>
@@ -49,7 +49,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
       )
     case "large":
       return (
-        <div className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0">
+        <div className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0 dark:bg-gray-500 dark:text-white">
           <img
             src={article.omslagsBild.file.url}
             alt=""
@@ -63,9 +63,9 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
             )}
             <Link to={article.path} className="block">
               {" "}
-              <h3 className="font-medium">{article.titel}</h3>
+              <h3 className="font-medium hover:underline">{article.titel}</h3>
             </Link>
-            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
+            <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2 dark:text-white">
               <Link
                 to={article.reporter[0].path}
                 className="flex items-center gap-2"
