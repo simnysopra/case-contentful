@@ -24,8 +24,8 @@ export default function Article({ data }) {
     <Layout w="sm">
       <div className="p-10 flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          {data.contentfulArticle.kategori.map((kategori) => (
-            <h3 className="uppercase tracking-wider font-medium text-gray-500">
+          {data.contentfulArticle.kategori.map((kategori, i) => (
+            <h3 key={i} className="uppercase tracking-wider font-medium text-gray-500">
               {kategori.titel}
             </h3>
           ))}
@@ -43,8 +43,9 @@ export default function Article({ data }) {
             <p>{data.contentfulArticle.reporter[0].name}</p>
           </Link>
           <div className="flex gap-2 items-center">
-            <div>
-              Uppdaterad: {moment(data.contentfulArticle.updatedAt).calendar()}
+            <div className="flex gap-2 items-center">
+              <p>Uppdaterad: {moment(data.contentfulArticle.updatedAt).calendar()} av</p>
+              <Link to={`/${data.contentfulArticle.reporter[data.contentfulArticle.reporter.length -1].path}`}><img className="rounded-full w-8" src={data.contentfulArticle.reporter[data.contentfulArticle.reporter.length -1].profilePicture.file.url}/></Link>
             </div>
             <div>|</div>
             <div>
