@@ -50,11 +50,11 @@ export default function Article({ data }) {
               className="rounded-full w-8"
               src={data.contentfulArticle.reporter[0].profilePicture.file.url}
             />
-            <p>{data.contentfulArticle.reporter[0].name}</p>
+            <p className="dark:text-white">{data.contentfulArticle.reporter[0].name}</p>
           </Link>
           <div className="flex gap-2 items-center">
             <div className="flex gap-2 items-center">
-              <p>
+              <p className="dark:text-white">
                 Uppdaterad:{" "}
                 {moment(data.contentfulArticle.updatedAt).calendar()} av
               </p>
@@ -76,7 +76,7 @@ export default function Article({ data }) {
               </Link>
             </div>
             <div>|</div>
-            <div>
+            <div className="dark:text-white">
               Publicerad:{" "}
               {moment(data.contentfulArticle.firstPublished).calendar()}
             </div>
@@ -87,7 +87,7 @@ export default function Article({ data }) {
           alt="articleImg"
           className="rounded-md mb-4"
         />
-        <div>
+        <div className="dark:text-white">
           {documentToReactComponents(
             JSON.parse(data.contentfulArticle.brodText.raw),
             options

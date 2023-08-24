@@ -68,7 +68,7 @@ export default function reporter({ data }) {
               <h3>{data.contentfulReporter.name}</h3>
             </div>
           </div>
-          <div className="w-[620px]">
+          <div className="w-[620px] dark:text-white">
             {data.contentfulReporter.biografi.biografi}
           </div>
         </div>
