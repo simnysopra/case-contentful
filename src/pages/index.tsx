@@ -22,7 +22,7 @@ export default function Homepage({ data }) {
 
   const content = data.allContentfulCategory.nodes.map((category, i) => {
     return (
-      <div key={i} className="">
+      <div key={i}>
         <h2 className="mb-6">{category.titel}</h2>
 
         <div className="flex gap-6 flex-wrap">
