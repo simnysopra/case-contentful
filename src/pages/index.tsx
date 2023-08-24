@@ -47,7 +47,7 @@ export default function Homepage({ data }) {
                       />
                       <div>{article.reporter[0].name}</div>
                     </Link>
-                    <div>{moment(article.updatedAt).calendar()}</div>
+                    <div>{moment(article.firstPublished).calendar()}</div>
                   </div>
                 </div>
               </div>
@@ -68,7 +68,7 @@ export const query = graphql`
         titel
         article {
           titel
-          updatedAt
+          firstPublished
           path
           reporter {
             name
