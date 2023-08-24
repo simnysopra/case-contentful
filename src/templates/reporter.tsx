@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import moment from "moment"
 import "moment/locale/sv"
 import Layout from "../components/layout"
+import Card from "../components/card"
 
 export default function reporter({ data }) {
   useEffect(() => {
@@ -74,26 +75,7 @@ export default function reporter({ data }) {
         <h2 className="py-5">Artiklar</h2>
         <div className=" flex items-left flex-wrap gap-4">
           {data.contentfulReporter.article.map((article, i) => {
-            return (
-              <div
-                key={i}
-                className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-              >
-                <img
-                  src={article.omslagsBild.file.url}
-                  alt=""
-                  className="rounded-t-md min-h-[200px] object-cover"
-                />
-                <div className="p-4 h-full flex flex-col gap-4">
-                  <Link to={`/${article.path}`} className="block cursor-pointer">
-                    <h3 className="font-medium">{article.titel}</h3>
-                  </Link>
-                  <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
-                    <div>{moment(article.firstPublished).calendar()}</div>
-                  </div>
-                </div>
-              </div>
-            )
+            return <Card key={i} size="medium" article={article} tag={false} />
           })}
         </div>
       </div>
