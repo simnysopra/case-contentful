@@ -5,6 +5,7 @@ import moment from "moment"
 import "moment/locale/sv"
 import * as React from "react"
 import Layout from "../components/layout"
+import Card from "../components/card"
 
 export default function Article({ data }) {
   const Text = ({ children }) => <p className="leading-relaxed">{children}</p>
@@ -96,27 +97,7 @@ export default function Article({ data }) {
         <div className="flex flex-wrap gap-2">
           {limitRelatedArticles.map((article, i) => {
             return (
-              <div
-                key={i}
-                className="w-52 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
-              >
-                <img
-                  src={article.omslagsBild.file.url}
-                  alt=""
-                  className="rounded-t-md min-h-[150px] object-cover"
-                />
-                <div className="p-4 h-full flex flex-col gap-4">
-                  <Link
-                    to={`/${article.path}`}
-                    className="block cursor-pointer"
-                  >
-                    <h5 className="font-medium">{article.titel}</h5>
-                  </Link>
-                  <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
-                    <div>{moment(article.firstPublished).calendar()}</div>
-                  </div>
-                </div>
-              </div>
+                <Card key={i} size="small" article={article} tag={false}/>
             )
           })}
         </div>
