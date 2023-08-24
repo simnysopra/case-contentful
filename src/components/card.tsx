@@ -20,11 +20,6 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
             className="rounded-t-md min-h-[150px] object-cover"
           />
           <div className="p-4 h-full flex flex-col gap-4">
-            {tag && (
-              <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-100 text-indigo-500">
-                {article.kategori[0].titel}
-              </span>
-            )}
             <Link to={`/${article.path}`} className="block cursor-pointer">
               <h5 className="font-medium">{article.titel}</h5>
             </Link>
@@ -61,6 +56,11 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
             className="rounded-t-md min-h-[200px] object-cover"
           />
           <div className="p-4 h-full flex flex-col gap-4">
+          {tag && (
+              <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-100 text-indigo-500">
+                {article.kategori[0].titel}
+              </span>
+            )}
             <Link to={article.path} className="block">
               {" "}
               <h3 className="font-medium">{article.titel}</h3>
