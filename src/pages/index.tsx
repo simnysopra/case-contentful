@@ -2,15 +2,30 @@ import { Link, graphql } from "gatsby"
 import moment from "moment"
 import "moment/locale/sv"
 import * as React from "react"
-import { Search } from "react-feather"
+import { Layers, Search } from "react-feather"
+import CategoryIcon from "../components/CategoryIcon"
 import Layout from "../components/layout"
 import Card from "../components/card"
 export default function Homepage({ data }) {
   const [query, setQuery] = React.useState("")
+  const [activeCategory, setActiveCategory] = React.useState("")
   const [searchActive, setSearchActive] = React.useState(false)
   moment.locale("sv")
 
-  const handleChange = (e) => setQuery(e.target.value)
+  const handleChange = (e) => {
+    setActiveCategory("")
+    setQuery(e.target.value)
+  }
+
+  const clearSearch = () => {
+    setSearchActive(false)
+    setQuery("")
+  }
+
+  const handleChangeCategory = (category) => {
+    clearSearch()
+    setActiveCategory(category)
+  }
 
   React.useEffect(() => {
     setSearchActive(query ? true : false)
@@ -18,9 +33,9 @@ export default function Homepage({ data }) {
 
   const featuredArticle = data.contentfulHomepage.featuredArticle
   const articles = data.allContentfulArticle.nodes
-  console.log(featuredArticle)
+  const categories = data.allContentfulCategory.nodes
 
-  const content = data.allContentfulCategory.nodes.map((category, i) => {
+  const content = categories.map((category, i) => {
     return (
       <div key={i} className="">
         <h2 className="mb-6">{category.titel}</h2>
@@ -37,6 +52,50 @@ export default function Homepage({ data }) {
       </div>
     )
   })
+
+  const filteredByCategory = (
+    <div className="">
+      <h2 className="mb-6">{activeCategory}</h2>
+
+      <div className="flex gap-6 flex-wrap">
+        {articles
+          .filter((article) => article.kategori[0].titel === activeCategory)
+          .map((article, i) => {
+            return (
+              <div
+                key={i}
+                className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
+              >
+                <img
+                  src={article.omslagsBild.file.url}
+                  alt=""
+                  className="rounded-t-md min-h-[200px] object-cover"
+                />
+                <div className="p-4 h-full flex flex-col gap-4">
+                  <Link to={article.path} className="block">
+                    {" "}
+                    <h3 className="font-medium">{article.titel}</h3>
+                  </Link>
+                  <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
+                    <Link
+                      to={article.reporter[0].path}
+                      className="flex items-center gap-2"
+                    >
+                      <img
+                        className="rounded-full w-8"
+                        src={article.reporter[0].profilePicture.file.url}
+                      />
+                      <div>{article.reporter[0].name}</div>
+                    </Link>
+                    <div>{moment(article.firstPublished).calendar()}</div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+      </div>
+    </div>
+  )
 
   const hero = (
     <div
@@ -93,7 +152,8 @@ export default function Homepage({ data }) {
   return (
     <Layout w={"lg"}>
       {hero}
-      <div className="mb-2 relative">
+
+      <div className="relative flex-grow">
         <input
           type="text"
           placeholder="Sök på artiklar"
@@ -105,7 +165,35 @@ export default function Homepage({ data }) {
           <Search color="gray" size={20} />
         </div>
       </div>
-      {!searchActive ? content : searchResults}
+
+      <div className="flex flex-wrap gap-2 justify-center sm:gap-6">
+        <div
+          className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 hover:cursor-pointer ${
+            !activeCategory && "bg-indigo-600 text-indigo-100"
+          }`}
+          onClick={() => handleChangeCategory("")}
+        >
+          <Layers size={20} />
+          <div className="">Alla</div>
+        </div>
+        {categories.map((category, i) => (
+          <div
+            key={i}
+            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 hover:cursor-pointer ${
+              activeCategory === category.titel &&
+              "bg-indigo-600 text-indigo-100"
+            }`}
+            onClick={() => handleChangeCategory(category.titel)}
+          >
+            <CategoryIcon category={category.titel} size={20} />
+            <div className="">{category.titel}</div>
+          </div>
+        ))}
+      </div>
+
+      {activeCategory && filteredByCategory}
+      {searchActive && searchResults}
+      {!activeCategory && !searchActive && content}
     </Layout>
   )
 }
@@ -167,32 +255,3 @@ export const query = graphql`
     }
   }
 `
-
-// {
-//   allContentfulCategory(
-//     sort: { createdAt: ASC }
-//   ) {
-//     nodes {
-//       titel
-//       article {
-//         titel
-//         firstPublished
-//         path
-//         reporter {
-//           name
-//           path
-//           profilePicture {
-//             file {
-//               url
-//             }
-//           }
-//         }
-//         omslagsBild {
-//           file {
-//             url
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
