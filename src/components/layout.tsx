@@ -1,5 +1,6 @@
-import { Link } from "gatsby"
 import * as React from "react"
+import Footer from "./Footer"
+import Nav from "./Nav"
 
 interface LayoutProps {
   children?: React.ReactNode
@@ -9,14 +10,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ w, children }) => {
   return (
     <>
-      <nav className="flex justify-between items-center p-6 px-8 mb-4 max-w-7xl mx-auto rounded-b-2xl shadow-lg">
-        <Link to="/" className="font-bold text-gray-800 tracking-wide">
-          🧢 CapNews
-        </Link>
-        <span className="text-gray-500 text-sm">
-          AI Generated News for Your Pleasure
-        </span>
-      </nav>
+      <header>
+        <Nav />
+      </header>
       <div
         className={`mx-auto p-4 flex flex-col gap-10 ${
           w === "lg" ? "max-w-7xl" : "max-w-3xl"
@@ -24,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ w, children }) => {
       >
         {children}
       </div>
+      <Footer />
     </>
   )
 }
