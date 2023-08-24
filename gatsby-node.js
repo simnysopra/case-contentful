@@ -1,4 +1,3 @@
-
 //https://www.gatsbyjs.com/docs/programmatically-create-pages-from-data/#creating-pages
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
@@ -8,7 +7,7 @@ exports.createPages = async function ({ actions, graphql }) {
           path
         }
       }
-      allContentfulReporter{
+      allContentfulReporter {
         nodes {
           path
         }
