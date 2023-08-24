@@ -72,12 +72,12 @@ export default function reporter({ data }) {
           </div>
         </div>
         <h2 className="py-5">Artiklar</h2>
-        <div className="w-40 flex items-left flex-col gap-4">
+        <div className=" flex items-left flex-wrap gap-4">
           {data.contentfulReporter.article.map((article, i) => {
             return (
               <div
                 key={i}
-                className="w-96 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
+                className="w-80 bg-gray-50 rounded-md drop-shadow flex flex-col flex-grow xl:flex-grow-0"
               >
                 <img
                   src={article.omslagsBild.file.url}

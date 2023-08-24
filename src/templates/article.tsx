@@ -8,6 +8,9 @@ import Layout from "../components/layout"
 
 export default function Article({ data }) {
   const Text = ({ children }) => <p className="leading-relaxed">{children}</p>
+  React.useEffect(() => {
+    console.log(data.contentfulArticle.reporter)
+  }, [])
 
   const options = {
     renderNode: {
@@ -25,7 +28,10 @@ export default function Article({ data }) {
       <div className="p-10 flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           {data.contentfulArticle.kategori.map((kategori, i) => (
-            <h3 key={i} className="uppercase tracking-wider font-medium text-gray-500">
+            <h3
+              key={i}
+              className="uppercase tracking-wider font-medium text-gray-500"
+            >
               {kategori.titel}
             </h3>
           ))}
@@ -44,8 +50,26 @@ export default function Article({ data }) {
           </Link>
           <div className="flex gap-2 items-center">
             <div className="flex gap-2 items-center">
-              <p>Uppdaterad: {moment(data.contentfulArticle.updatedAt).calendar()} av</p>
-              <Link to={`/${data.contentfulArticle.reporter[data.contentfulArticle.reporter.length -1].path}`}><img className="rounded-full w-8" src={data.contentfulArticle.reporter[data.contentfulArticle.reporter.length -1].profilePicture.file.url}/></Link>
+              <p>
+                Uppdaterad:{" "}
+                {moment(data.contentfulArticle.updatedAt).calendar()} av
+              </p>
+              <Link
+                to={`/${
+                  data.contentfulArticle.reporter[
+                    data.contentfulArticle.reporter.length - 1
+                  ].path
+                }`}
+              >
+                <img
+                  className="rounded-full w-8"
+                  src={
+                    data.contentfulArticle.reporter[
+                      data.contentfulArticle.reporter.length - 1
+                    ].profilePicture.file.url
+                  }
+                />
+              </Link>
             </div>
             <div>|</div>
             <div>
