@@ -4,8 +4,8 @@ import "moment/locale/sv"
 import * as React from "react"
 import { Layers, Search } from "react-feather"
 import CategoryIcon from "../components/CategoryIcon"
-import Layout from "../components/layout"
 import Card from "../components/card"
+import Layout from "../components/layout"
 export default function Homepage({ data }) {
   const [query, setQuery] = React.useState("")
   const [activeCategory, setActiveCategory] = React.useState("")
@@ -44,9 +44,7 @@ export default function Homepage({ data }) {
           {articles
             .filter((article) => article.kategori[0].titel === category.titel)
             .map((article, i) => {
-              return (
-                <Card size="large" article={article} tag={false} />
-              )
+              return <Card size="large" article={article} tag={false} />
             })}
         </div>
       </div>
@@ -61,9 +59,7 @@ export default function Homepage({ data }) {
         {articles
           .filter((article) => article.kategori[0].titel === activeCategory)
           .map((article, i) => {
-            return (
-              <Card key={i} size="large" article={article} tag={false}/>
-            )
+            return <Card key={i} size="large" article={article} tag={false} />
           })}
       </div>
     </div>
@@ -113,9 +109,7 @@ export default function Homepage({ data }) {
             article.titel.toLowerCase().includes(query.toLowerCase())
           )
           .map((article, i) => {
-            return (
-              <Card key={i} size="large" article={article} tag={true}/>
-            )
+            return <Card key={i} size="large" article={article} tag={true} />
           })}
       </div>
     </div>
@@ -129,19 +123,20 @@ export default function Homepage({ data }) {
         <input
           type="text"
           placeholder="Sök på artiklar"
-          className="w-full text-sm border py-3 px-4 rounded-xl focus:outline-none focus:ring-2 ring-indigo-400 dark:bg-gray-500 dark:text-white dark:placeholder:text-white"
+          className="w-full text-sm border py-3 px-4 rounded-xl focus:outline-none focus:ring-2 ring-indigo-400 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-900"
           value={query}
           onChange={handleChange}
         />
-        <div className="absolute top-0 right-0 mr-6 mt-3">
-          <Search color="gray" size={20} />
+        <div className="absolute top-0 right-0 mr-6 mt-3 text-gray-500 dark:text-gray-400">
+          <Search size={20} />
         </div>
       </div>
 
       <div className="flex flex-wrap gap-2 justify-center sm:gap-6">
         <div
-          className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 hover:cursor-pointer ${
-            !activeCategory && "bg-indigo-600 text-indigo-100"
+          className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300 hover:cursor-pointer ${
+            !activeCategory &&
+            "bg-indigo-600 text-indigo-50 dark:bg-indigo-700 dark:text-gray-100"
           }`}
           onClick={() => handleChangeCategory("")}
         >
@@ -151,9 +146,9 @@ export default function Homepage({ data }) {
         {categories.map((category, i) => (
           <div
             key={i}
-            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 hover:cursor-pointer ${
+            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300 hover:cursor-pointer ${
               activeCategory === category.titel &&
-              "bg-indigo-600 text-indigo-100"
+              "bg-indigo-600 text-indigo-50 dark:bg-indigo-700 dark:text-gray-100"
             }`}
             onClick={() => handleChangeCategory(category.titel)}
           >
