@@ -21,7 +21,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
           />
           <div className="p-4 h-full flex flex-col gap-4">
             <Link to={`/${article.path}`} className="block cursor-pointer">
-              <h5 className="font-medium">{article.titel}</h5>
+              <h5 className="font-medium hover:underline">{article.titel}</h5>
             </Link>
             <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
               <div>{moment(article.firstPublished).calendar()}</div>
@@ -39,7 +39,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
           />
           <div className="p-4 h-full flex flex-col gap-4">
             <Link to={`/${article.path}`} className="block cursor-pointer">
-              <h3 className="font-medium">{article.titel}</h3>
+              <h3 className="font-medium hover:underline">{article.titel}</h3>
             </Link>
             <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
               <div>{moment(article.firstPublished).calendar()}</div>
@@ -63,7 +63,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
             )}
             <Link to={article.path} className="block">
               {" "}
-              <h3 className="font-medium">{article.titel}</h3>
+              <h3 className="font-medium hover:underline">{article.titel}</h3>
             </Link>
             <div className="text-gray-500 flex items-center justify-between text-sm mt-auto pt-2">
               <Link
