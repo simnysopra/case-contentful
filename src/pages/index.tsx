@@ -82,7 +82,9 @@ export default function Homepage({ data }) {
             }))
         }
         {filteredArticles.length === 0 && (
-          <p>Inga artiklar hittades. Prova att söka igen!</p>
+          <p className="text-gray-700 dark:text-gray-300">
+            Inga artiklar hittades. Prova att söka igen!
+          </p>
         )}
       </div>
     </div>
