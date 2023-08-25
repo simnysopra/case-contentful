@@ -146,9 +146,10 @@ export default function Homepage({ data }) {
         {categories.map((category, i) => (
           <div
             key={i}
-            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300 hover:cursor-pointer ${
-              activeCategory === category.titel &&
-              "bg-indigo-600 text-indigo-50 dark:bg-indigo-700 dark:text-gray-100"
+            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium  hover:cursor-pointer ${
+              activeCategory === category.titel ?
+              "bg-indigo-600 text-indigo-50 !important dark:bg-indigo-700 dark:text-gray-100"
+              : "text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300"
             }`}
             onClick={() => handleChangeCategory(category.titel)}
           >
