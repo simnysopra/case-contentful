@@ -6,9 +6,6 @@ import Card from "../components/card"
 import Layout from "../components/layout"
 
 export default function reporter({ data }) {
-  useEffect(() => {
-    console.log(data.contentfulReporter)
-  }, [])
 
   return (
     <Layout>
