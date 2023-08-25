@@ -51,6 +51,9 @@ export const query = graphql`
       article {
         titel
         path
+        kategori {
+          titel
+        }
         omslagsBild {
           file {
             url

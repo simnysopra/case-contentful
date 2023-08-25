@@ -7,15 +7,15 @@ function Nav() {
   const [isDarkMode, setIsDarkMode] = React.useState(false)
 
   const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", newDarkMode ? "dark" : "light");
-  };
+    const newDarkMode = !isDarkMode
+    setIsDarkMode(newDarkMode)
+    localStorage.setItem("darkMode", newDarkMode ? "dark" : "light")
+  }
 
   React.useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode");
-    setIsDarkMode(savedMode === "dark");
-  }, []);
+    const savedMode = localStorage.getItem("darkMode")
+    setIsDarkMode(savedMode === "dark")
+  }, [])
 
   return (
     <>
@@ -30,9 +30,10 @@ function Nav() {
           🧢 CapNews
         </Link>
         <div className="flex gap-10 items-center">
-          <span className="text-gray-500 text-sm dark:text-gray-300">
+          <span className="text-gray-500 text-sm dark:text-gray-300 hidden sm:block">
             AI Generated News for Your Pleasure
           </span>
+
           {isDarkMode ? (
             <Moon
               size={38}
