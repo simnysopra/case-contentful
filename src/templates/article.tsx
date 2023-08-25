@@ -1,16 +1,19 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
-import { Link, graphql } from "gatsby"
-import moment from "moment"
+import { graphql } from "gatsby"
 import "moment/locale/sv"
 import * as React from "react"
-import Card from "../components/card"
-import Layout from "../components/layout"
 import CategoryList from "../components/CategoryList"
 import ReporterInfo from "../components/ReporterInfo"
+import Card from "../components/card"
+import Layout from "../components/layout"
 
 export default function Article({ data }) {
-  const Text = ({ children }) => <p className="leading-relaxed">{children}</p>
+  const Text = ({ children }) => (
+    <p className="leading-relaxed mt-2 mb-6 text-gray-600 dark:text-gray-400">
+      {children}
+    </p>
+  )
   const options = {
     renderNode: {
       "embedded-asset-block": (node) => (
@@ -34,16 +37,20 @@ export default function Article({ data }) {
   return (
     <Layout w="sm">
       <div className="flex flex-col gap-4">
-        <CategoryList categories={data.contentfulArticle.kategori}/>
+        <CategoryList categories={data.contentfulArticle.kategori} />
         <h2>{data.contentfulArticle.titel}</h2>
-        <ReporterInfo firstPublished={data.contentfulArticle.firstPublished} updatedAt={data.contentfulArticle.updatedAt} reporter={data.contentfulArticle.reporter}/>
+        <ReporterInfo
+          firstPublished={data.contentfulArticle.firstPublished}
+          updatedAt={data.contentfulArticle.updatedAt}
+          reporter={data.contentfulArticle.reporter}
+        />
 
         <img
           src={data.contentfulArticle.omslagsBild.file.url}
           alt="articleImg"
           className="rounded-md mb-4"
         />
-        <div className="dark:text-gray-300 mb-10">
+        <div className="mb-10">
           {documentToReactComponents(
             JSON.parse(data.contentfulArticle.brodText.raw),
             options
