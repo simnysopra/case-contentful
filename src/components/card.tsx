@@ -39,7 +39,7 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
           />
           <div className="p-4 h-full flex flex-col gap-4">
             <Link to={`/${article.path}`} className="block cursor-pointer">
-              <h3 className="font-medium hover:underline dark:text-gray-400">
+              <h3 className="font-medium hover:underline dark:text-gray-200">
                 {article.titel}
               </h3>
             </Link>
