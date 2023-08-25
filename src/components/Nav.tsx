@@ -6,6 +6,17 @@ import { Helmet } from "react-helmet"
 function Nav() {
   const [isDarkMode, setIsDarkMode] = React.useState(false)
 
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    localStorage.setItem("darkMode", newDarkMode ? "dark" : "light");
+  };
+
+  React.useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    setIsDarkMode(savedMode === "dark");
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -26,13 +37,13 @@ function Nav() {
             <Moon
               size={38}
               className="text-gray-300 p-2 hover:cursor-pointer hover:bg-gray-800 rounded-full"
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={toggleDarkMode}
             />
           ) : (
             <Sun
               size={38}
               className="text-gray-500 p-2 hover:cursor-pointer hover:bg-gray-100 rounded-full"
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={toggleDarkMode}
             />
           )}
         </div>
