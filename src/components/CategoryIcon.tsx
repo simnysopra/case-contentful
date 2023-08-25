@@ -1,7 +1,12 @@
 import React from "react"
-import { BookOpen, Cpu, DollarSign, Film, Globe } from "react-feather"
+import { Cpu, DollarSign, Film, Globe, Layers } from "react-feather"
 
-function CategoryIcon({ category, size }) {
+type Props = {
+  category: string
+  size: number
+}
+
+const CategoryIcon: React.FC<Props> = ({ category, size }) => {
   let activeIcon
 
   switch (category) {
@@ -18,7 +23,7 @@ function CategoryIcon({ category, size }) {
       activeIcon = <Globe size={size} />
       break
     default:
-      activeIcon = <BookOpen size={size} />
+      activeIcon = <Layers size={size} />
       break
   }
 

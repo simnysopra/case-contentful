@@ -1,11 +1,13 @@
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import moment from "moment"
 import "moment/locale/sv"
 import * as React from "react"
-import { Layers, Search } from "react-feather"
-import CategoryIcon from "../components/CategoryIcon"
+import { Search } from "react-feather"
+import CategorySelector from "../components/CategorySelector"
+import Hero from "../components/Hero"
 import Card from "../components/card"
 import Layout from "../components/layout"
+
 export default function Homepage({ data }) {
   const [query, setQuery] = React.useState("")
   const [activeCategory, setActiveCategory] = React.useState("")
@@ -31,12 +33,11 @@ export default function Homepage({ data }) {
     setSearchActive(query ? true : false)
   }, [query])
 
-  const featuredArticle = data.contentfulHomepage.featuredArticle
   const articles = data.allContentfulArticle.nodes
-  let filteredArticles
   const categories = data.allContentfulCategory.nodes
+  let filteredArticles
 
-  const content = categories.map((category, i) => {
+  const allArticles = categories.map((category, i) => {
     return (
       <div key={i}>
         <h2 className="mb-6">{category.titel}</h2>
@@ -45,15 +46,15 @@ export default function Homepage({ data }) {
           {articles
             .filter((article) => article.kategori[0].titel === category.titel)
             .map((article, i) => {
-              return <Card size="large" article={article} tag={false} />
+              return <Card key={i} size="large" article={article} tag={false} />
             })}
         </div>
       </div>
     )
   })
 
-  const filteredByCategory = (
-    <div className="">
+  const articlesByCategory = (
+    <div>
       <h2 className="mb-6">{activeCategory}</h2>
 
       <div className="flex gap-6 flex-wrap">
@@ -66,42 +67,8 @@ export default function Homepage({ data }) {
     </div>
   )
 
-  const hero = (
-    <div
-      style={{
-        backgroundImage: `url(https:${featuredArticle.omslagsBild.file.url})`,
-      }}
-      className={`h-96 bg-cover bg-center rounded-xl`}
-    >
-      <div className="h-full w-full bg-gray-950/70 backdrop-blur-sm flex flex-col gap-4 justify-center p-10 rounded-xl">
-        <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-200 text-indigo-600 dark:bg-indigo-500/50 dark:text-indigo-50">
-          {featuredArticle.kategori[0].titel}
-        </span>
-        <Link to={featuredArticle.path}>
-          <h2 className="text-white font-medium sm:w-2/3">
-            {featuredArticle.titel}
-          </h2>
-        </Link>
-        <div className="text-gray-300 flex gap-2 items-center text-sm pt-2">
-          <Link
-            to={featuredArticle.reporter[0].path}
-            className="flex items-center gap-2"
-          >
-            <img
-              className="rounded-full w-8"
-              src={featuredArticle.reporter[0].profilePicture.file.url}
-            />
-            <div>{featuredArticle.reporter[0].name}</div>
-          </Link>
-          <div>•</div>
-          <div>{moment(featuredArticle.firstPublished).calendar()}</div>
-        </div>
-      </div>
-    </div>
-  )
-
-  const searchResults = (
-    <div className="">
+  const searchedArticles = (
+    <div>
       <h2 className="mb-6">Sökresultat</h2>
 
       <div className="flex gap-6 flex-wrap">
@@ -123,7 +90,10 @@ export default function Homepage({ data }) {
 
   return (
     <Layout w={"lg"}>
-      {hero}
+      <Hero
+        featuredArticle={data.contentfulHomepage.featuredArticle}
+        moment={moment}
+      />
 
       <div className="relative flex-grow">
         <input
@@ -139,42 +109,24 @@ export default function Homepage({ data }) {
       </div>
 
       <div className="flex flex-wrap gap-2 justify-center sm:gap-6">
-        <div
-          className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium hover:cursor-pointer ${
-            !activeCategory
-              ? "bg-indigo-600 text-indigo-50 dark:bg-indigo-700 dark:text-gray-100"
-              : "text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300"
-          }`}
-          onClick={() => handleChangeCategory("")}
-        >
-          <Layers size={20} />
-          <div className="">Alla</div>
-        </div>
+        <CategorySelector
+          category=""
+          activeCategory={activeCategory}
+          handleChangeCategory={handleChangeCategory}
+        />
         {categories.map((category, i) => (
-          <div
+          <CategorySelector
             key={i}
-            className={`flex flex-grow items-center gap-2 py-3 px-6 rounded-xl text-xs font-medium  hover:cursor-pointer ${
-              activeCategory === category.titel
-                ? "bg-indigo-600 text-indigo-50 !important dark:bg-indigo-700 dark:text-gray-100"
-                : "text-indigo-800 bg-indigo-100 dark:bg-gray-900 dark:text-gray-300"
-            }`}
-            onClick={() => handleChangeCategory(category.titel)}
-          >
-            <CategoryIcon category={category.titel} size={20} />
-            <div
-              className={`${
-                activeCategory === category.titel && "text-indigo-50"
-              }`}
-            >
-              {category.titel}
-            </div>
-          </div>
+            category={category.titel}
+            activeCategory={activeCategory}
+            handleChangeCategory={handleChangeCategory}
+          />
         ))}
       </div>
 
-      {activeCategory && filteredByCategory}
-      {searchActive && searchResults}
-      {!activeCategory && !searchActive && content}
+      {activeCategory && articlesByCategory}
+      {searchActive && searchedArticles}
+      {!activeCategory && !searchActive && allArticles}
     </Layout>
   )
 }
