@@ -33,6 +33,7 @@ export default function Homepage({ data }) {
 
   const featuredArticle = data.contentfulHomepage.featuredArticle
   const articles = data.allContentfulArticle.nodes
+  let filteredArticles
   const categories = data.allContentfulCategory.nodes
 
   const content = categories.map((category, i) => {
@@ -73,7 +74,7 @@ export default function Homepage({ data }) {
       className={`h-96 bg-cover bg-center rounded-xl`}
     >
       <div className="h-full w-full bg-gray-950/70 backdrop-blur-sm flex flex-col gap-4 justify-center p-10 rounded-xl">
-        <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-200 text-indigo-600">
+        <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-200 text-indigo-600 dark:bg-indigo-500/50 dark:text-indigo-50">
           {featuredArticle.kategori[0].titel}
         </span>
         <Link to={featuredArticle.path}>
@@ -104,13 +105,18 @@ export default function Homepage({ data }) {
       <h2 className="mb-6">Sökresultat</h2>
 
       <div className="flex gap-6 flex-wrap">
-        {articles
-          .filter((article) =>
-            article.titel.toLowerCase().includes(query.toLowerCase())
-          )
-          .map((article, i) => {
-            return <Card key={i} size="large" article={article} tag={true} />
-          })}
+        {
+          (filteredArticles = articles
+            .filter((article) =>
+              article.titel.toLowerCase().includes(query.toLowerCase())
+            )
+            .map((article, i) => {
+              return <Card key={i} size="large" article={article} tag={true} />
+            }))
+        }
+        {filteredArticles.length === 0 && (
+          <p>Inga artiklar hittades. Prova att söka igen!</p>
+        )}
       </div>
     </div>
   )
