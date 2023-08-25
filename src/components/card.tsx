@@ -38,6 +38,11 @@ const card: React.FC<Props> = ({ tag, size, article }) => {
             className="rounded-t-md min-h-[200px] object-cover"
           />
           <div className="p-4 h-full flex flex-col gap-4">
+            {tag && (
+              <span className="w-min text-xs py-1 px-2 rounded-md bg-indigo-100 text-indigo-500 dark:bg-indigo-500/50 dark:text-indigo-50">
+                {article.kategori[0].titel}
+              </span>
+            )}
             <Link to={`/${article.path}`} className="block cursor-pointer">
               <h3 className="font-medium hover:underline dark:text-gray-200">
                 {article.titel}

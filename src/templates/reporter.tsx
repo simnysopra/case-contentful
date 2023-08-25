@@ -34,7 +34,7 @@ export default function reporter({ data }) {
         <h2 className="py-5">Artiklar</h2>
         <div className=" flex items-left flex-wrap gap-4">
           {data.contentfulReporter.article.map((article, i) => {
-            return <Card key={i} size="medium" article={article} tag={false} />
+            return <Card key={i} size="medium" article={article} tag={true} />
           })}
         </div>
       </div>
@@ -51,6 +51,9 @@ export const query = graphql`
       article {
         titel
         path
+        kategori {
+          titel
+        }
         omslagsBild {
           file {
             url
