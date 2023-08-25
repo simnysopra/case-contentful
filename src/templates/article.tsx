@@ -16,10 +16,11 @@ export default function Article({ data }) {
   )
   const options = {
     renderNode: {
-      "embedded-asset-block": (node) => (
+      [BLOCKS.EMBEDDED_ASSET]: () => (
         <img
-          src={node.data.target.fields.file.url}
-          alt={node.data.target.fields.title || ""}
+          src={data.contentfulArticle.brodText.references[0].file.url}
+          alt=""
+          className="rounded-xl mb-6"
         />
       ),
       [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
@@ -75,6 +76,13 @@ export const query = graphql`
       titel
       brodText {
         raw
+        references {
+          ... on ContentfulAsset {
+            file {
+              url
+            }
+          }
+        }
       }
       kategori {
         titel
