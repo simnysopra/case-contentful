@@ -153,7 +153,7 @@ export default function Homepage({ data }) {
             onClick={() => handleChangeCategory(category.titel)}
           >
             <CategoryIcon category={category.titel} size={20} />
-            <div className="">{category.titel}</div>
+            <div className={`${activeCategory === category.titel && "text-indigo-50"}`}>{category.titel}</div>
           </div>
         ))}
       </div>
