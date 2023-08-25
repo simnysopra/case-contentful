@@ -29,7 +29,7 @@ export default function Article({ data }) {
   const limitRelatedArticles = relatedArticles.slice(Math.max(relatedArticles.length - 3, 0));
   return (
     <Layout w="sm">
-      <div className="p-10 flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           {data.contentfulArticle.kategori.map((kategori, i) => (
             <h3

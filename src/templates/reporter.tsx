@@ -12,7 +12,7 @@ export default function reporter({ data }) {
 
   return (
     <Layout>
-      <div className="p-10">
+      <div>
         <div className="mb-10 p-8 rounded-xl bg-gray-100 border-2 shadow-xl dark:bg-gray-900 dark:border-gray-800">
           <div className="flex gap-6 items-center mb-6">
             <img
@@ -33,7 +33,7 @@ export default function reporter({ data }) {
         </div>
         <h2 className="py-5">Artiklar</h2>
         <div className=" flex items-left flex-wrap gap-4">
-          {data.contentfulReporter.article.map((article, i) => {
+          {data.contentfulReporter.article?.map((article, i) => {
             return <Card key={i} size="medium" article={article} tag={false} />
           })}
         </div>
